@@ -1,12 +1,19 @@
 # URL Shortener Service
 
-A production-ready, full-stack URL shortener service built with modern technologies. Create short, memorable links with analytics tracking, all wrapped in a beautiful, responsive UI.
+A production-ready, full-stack URL shortener service built with modern technologies. Create short, memorable links with analytics tracking, all wrapped in a beautiful dark-themed, responsive UI.
 
 ![Tech Stack](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Railway](https://img.shields.io/badge/Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+## 🌐 Live Demo
+
+- **Frontend:** https://url-shortener-sandy-phi.vercel.app
+- **Backend API:** https://url-shortener-production-6295.up.railway.app
+- **Custom Domain (Pending):** https://jng.is-a.dev (PR submitted)
 
 ## 🚀 Features
 
@@ -23,38 +30,44 @@ A production-ready, full-stack URL shortener service built with modern technolog
 
 ### Frontend
 - ✅ **Modern React UI** with TypeScript
+- ✅ **Dark Theme** with gradient backgrounds and glass morphism
 - ✅ **Tailwind CSS** for beautiful, responsive design
 - ✅ **One-click Copy** functionality
 - ✅ **Real-time Analytics** display
 - ✅ **Input Validation** with helpful error messages
 - ✅ **Mobile-friendly** responsive design
 - ✅ **Fast Performance** with Vite
+- ✅ **Deployed on Vercel** for global CDN delivery
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
+Before you begin, ensure you have the following:
 - **Node.js** (v18 or higher)
 - **npm** or **yarn**
-- **MongoDB** (v7 or higher)
-- **Docker** and **Docker Compose** (optional, for containerized deployment)
+- **MongoDB Atlas account** (free tier available) or local MongoDB
+- **Docker** and **Docker Compose** (optional, for local containerized development)
+- **Railway account** (optional, for backend deployment)
+- **Vercel account** (optional, for frontend deployment)
 
 ## 🛠️ Tech Stack
 
 ### Backend
 - **Runtime:** Node.js with Express
 - **Language:** TypeScript
-- **Database:** MongoDB with Mongoose
+- **Database:** MongoDB Atlas (Cloud)
 - **Security:** Helmet, CORS, Rate Limiting
 - **Validation:** Validator.js
 - **ID Generation:** nanoid
+- **Deployment:** Railway with Docker
 
 ### Frontend
 - **Framework:** React 18
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS with dark theme
 - **Build Tool:** Vite
 - **HTTP Client:** Axios
 - **Icons:** Lucide React
+- **Deployment:** Vercel
 
 ## 📦 Installation
 
@@ -111,13 +124,15 @@ The easiest way to get started is using Docker Compose, which will set up the en
    ```env
    NODE_ENV=development
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/url-shortener
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/url-shortener
    BASE_URL=http://localhost:5000
    FRONTEND_URL=http://localhost:3000
-   URL_EXPIRATION_DAYS=0
+   URL_EXPIRATION_DAYS=365
    RATE_LIMIT_WINDOW_MS=900000
    RATE_LIMIT_MAX_REQUESTS=100
    ```
+
+   > **Note:** For production, use MongoDB Atlas. See [MONGODB_SETUP.md](./MONGODB_SETUP.md) for setup instructions.
 
 5. **Start MongoDB** (if not using Docker):
    ```bash
@@ -326,49 +341,37 @@ url-shortener/
 
 ## 🚀 Deployment
 
-### Deploy with Docker
+This project is currently deployed and running in production:
 
-1. **Build and start all services:**
-   ```bash
-   docker-compose up --build -d
-   ```
+- **Frontend (Vercel):** https://url-shortener-sandy-phi.vercel.app
+- **Backend (Railway):** https://url-shortener-production-6295.up.railway.app
+- **Database:** MongoDB Atlas (M0 Free Tier)
 
-2. **View logs:**
-   ```bash
-   docker-compose logs -f
-   ```
+### Deploy Your Own Instance
 
-3. **Scale services** (if needed):
-   ```bash
-   docker-compose up --scale backend=3 -d
-   ```
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
-### Deploy Backend to Production
+#### Quick Deploy to Railway (Backend)
 
-1. **Set environment to production:**
-   ```env
-   NODE_ENV=production
-   ```
+1. **Push your code to GitHub**
+2. **Go to [Railway](https://railway.app)**
+3. **Create New Project** → Deploy from GitHub repo
+4. **Add environment variables** (see Backend Variables section below)
+5. **Railway will auto-detect Dockerfile and deploy**
 
-2. **Build TypeScript:**
-   ```bash
-   npm run build
-   ```
+#### Quick Deploy to Vercel (Frontend)
 
-3. **Start with PM2** (recommended):
-   ```bash
-   npm install -g pm2
-   pm2 start dist/server.js --name url-shortener-backend
-   ```
+1. **Go to [Vercel](https://vercel.com)**
+2. **Import your GitHub repository**
+3. **Set Root Directory to `frontend`**
+4. **Add environment variable:** `VITE_API_URL=<your-railway-url>`
+5. **Deploy**
 
-### Deploy Frontend to Production
+### Custom Domain Setup
 
-1. **Build for production:**
-   ```bash
-   npm run build
-   ```
-
-2. **Serve with nginx, Apache, or any static host**
+The project supports custom domains. Current setup:
+- Submitted PR for `jng.is-a.dev` (free subdomain)
+- See [DEPLOYMENT.md](./DEPLOYMENT.md) for custom domain instructions
 
 ## 🧪 Testing
 
@@ -390,12 +393,12 @@ npm test
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `NODE_ENV` | Environment mode | `development` |
+| `NODE_ENV` | Environment mode | `production` |
 | `PORT` | Server port | `5000` |
-| `MONGODB_URI` | MongoDB connection string | `mongodb://localhost:27017/url-shortener` |
-| `BASE_URL` | Base URL for short links | `http://localhost:5000` |
-| `FRONTEND_URL` | Frontend URL for CORS | `http://localhost:3000` |
-| `URL_EXPIRATION_DAYS` | Days until URL expires (0 = never) | `0` |
+| `MONGODB_URI` | MongoDB connection string | `mongodb+srv://...` |
+| `BASE_URL` | Base URL for short links | `https://url-shortener-production-6295.up.railway.app` |
+| `FRONTEND_URL` | Frontend URL for CORS | `https://url-shortener-sandy-phi.vercel.app` |
+| `URL_EXPIRATION_DAYS` | Days until URL expires (0 = never) | `365` |
 | `RATE_LIMIT_WINDOW_MS` | Rate limit window in milliseconds | `900000` |
 | `RATE_LIMIT_MAX_REQUESTS` | Max requests per window | `100` |
 
@@ -403,7 +406,14 @@ npm test
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `VITE_API_URL` | Backend API URL | `http://localhost:5000` |
+| `VITE_API_URL` | Backend API URL | `https://url-shortener-production-6295.up.railway.app` |
+
+## 📚 Documentation
+
+- **[QUICKSTART.md](./QUICKSTART.md)** - Quick start guide
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Detailed deployment instructions
+- **[MONGODB_SETUP.md](./MONGODB_SETUP.md)** - MongoDB Atlas setup guide
+- **[PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md)** - Project overview and architecture
 
 ## 🤝 Contributing
 
@@ -428,10 +438,14 @@ This project is licensed under the MIT License.
 
 ## 📧 Support
 
-For support, email your-email@example.com or create an issue in the repository.
+For support, create an issue in the repository.
+
+## 👤 Author
+
+**jngonzales**
+- GitHub: [@jngonzales](https://github.com/jngonzales)
+- Repository: [URL-Shortener](https://github.com/jngonzales/URL-Shortener)
 
 ---
-
-**Made with ❤️ by Your Name**
 
 ⭐ Star this repository if you find it helpful!
