@@ -1,0 +1,33 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "Production-ready URL Shortener with React, TypeScript, Node.js, and MongoDB",
+  "private": true,
+  "scripts": {
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "dev": "echo 'Run: npm run dev:backend and npm run dev:frontend in separate terminals'",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:all": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:build": "docker-compose up --build -d",
+    "docker:clean": "docker-compose down -v"
+  },
+  "keywords": [
+    "url-shortener",
+    "react",
+    "typescript",
+    "nodejs",
+    "mongodb",
+    "express",
+    "docker"
+  ],
+  "author": "",
+  "license": "MIT"
+}
