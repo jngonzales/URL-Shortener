@@ -69,13 +69,15 @@ Your URL Shortener can be deployed for **FREE** using modern platforms!
    ```
    NODE_ENV=production
    PORT=5000
-   MONGODB_URI=mongodb+srv://jngonz24_db_user:XyHcOUfz73Dvje55@cluster0.hplaric.mongodb.net/url-shortener?retryWrites=true&w=majority
+   MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/url-shortener?retryWrites=true&w=majority
    BASE_URL=YOUR_RAILWAY_URL (e.g., https://your-app.railway.app)
    FRONTEND_URL=YOUR_VERCEL_URL (e.g., https://url-shortener.vercel.app)
-   URL_EXPIRATION_DAYS=0
+   URL_EXPIRATION_DAYS=365
    RATE_LIMIT_WINDOW_MS=900000
    RATE_LIMIT_MAX_REQUESTS=100
    ```
+   
+   ⚠️ **IMPORTANT:** Replace `YOUR_USERNAME`, `YOUR_PASSWORD`, and `xxxxx` with your actual MongoDB Atlas credentials. Never commit real credentials to Git!
 
 4. **Deploy & Get URL** (e.g., `https://url-shortener-production.up.railway.app`)
 
